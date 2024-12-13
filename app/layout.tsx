@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { Noise, Footer, FuturisticHero, Name } from "./components";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,8 +46,24 @@ export default function RootLayout({
               <FuturisticHero />
               <Noise />
               <div className="flex h-full flex-col justify-between p-8 transparent text-neutral-500">
-                <Name />
-                <main className="w-full space-y-6">{children}</main>
+                <div className="space-y-1">
+                  <Name />
+                  <div className="space-x-1.5">
+                    <Link
+                      href="/"
+                      className="text-xs text-blue-500 hover:text-blue-700"
+                    >
+                      Home
+                    </Link>
+                    <Link
+                      href="/n/prompts"
+                      className="text-xs text-blue-500 hover:text-blue-700"
+                    >
+                      Prompts
+                    </Link>
+                  </div>
+                </div>
+                <main className="w-full gap-2 flex flex-col">{children}</main>
               </div>
             </div>
             <div className="w-8 h-full" />
