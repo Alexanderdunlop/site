@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
+import { Noise, Footer, FuturisticHero, Name } from "./components";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,40 +35,25 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-        <body className="antialiased tracking-tight">
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 transparent text-gray-900">
-            <main className="max-w-[60ch] mx-auto w-full space-y-6">
-              {children}
-            </main>
-            <Footer />
+        <body className="antialiased flex flex-col fixed w-screen tracking-tight bg-neutral-100 h-screen">
+          <div className="h-8 w-full" />
+          <div className="flex flex-1">
+            <div className="w-8 h-full relative">
+              <Footer />
+            </div>
+            <div className="relative overflow-hidden flex-1 border border-neutral-500">
+              <FuturisticHero />
+              <Noise />
+              <div className="flex h-full flex-col justify-between p-8 transparent text-neutral-500">
+                <Name />
+                <main className="w-full space-y-6">{children}</main>
+              </div>
+            </div>
+            <div className="w-8 h-full" />
           </div>
+          <div className="h-8 w-full" />
         </body>
       </html>
     </ViewTransitions>
-  );
-}
-
-function Footer() {
-  const links = [
-    { name: "linkedin", url: "https://www.linkedin.com/in/alexander-dunlop" },
-    { name: "github", url: "https://github.com/alexanderdunlop" },
-  ];
-
-  return (
-    <footer className="mt-12 text-center">
-      <div className="flex justify-center space-x-4 tracking-tight">
-        {links.map((link) => (
-          <a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
-          >
-            {link.name}
-          </a>
-        ))}
-      </div>
-    </footer>
   );
 }
